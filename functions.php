@@ -283,6 +283,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary)
 		$Server->wsClose($clientID);
 		return;
 	}
+	$message = utf8($message);
 
 	foreach ($Server->wsClients as $id => $client) {
 		if ($id != $clientID)
@@ -298,6 +299,7 @@ function huuda($message)
 	$clientID = 0;
 	$messageLength = strlen($message);
 	$binary = false;
+	$message = utf8($message);
 	if (strlen($message) > 3 && $irc->firsttime == false)
 		foreach ($Server->wsClients as $id => $client)
 		$Server->wsSend($id, date("H:i:s", time()) . " " . htmlentities($message) . "<br/>");
@@ -325,7 +327,7 @@ function wsOnClose($clientID, $status)
  */
 function utf8($str)
 {
-	if (Controller_Admin::utf8_compliant($str) == 1) {
+	if (utf8_compliant($str) == 1) {
 		$return = $str;
 	} else {
 		$return = utf8_encode($str);
