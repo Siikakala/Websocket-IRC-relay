@@ -13,7 +13,7 @@ class IRC{
     public $buffer;
 	public $last_ping;
 	public $timeout;
-    private $firsttime;
+    public $firsttime;
 
     // Class constructor
     public function __construct($p_server,$p_port,$p_nick,$p_name,$p_channel,$p_vhost,$p_timeout,$p_last){
