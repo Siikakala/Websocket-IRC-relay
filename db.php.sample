@@ -1,0 +1,18 @@
+<?php
+//Huom! Tietokannan käyttäjällä tulee olla oikeus lisätä ja muuttaa tauluja!
+define(__db_host, "localhost"); //Host, älä muuta, jollet tiedä mikä se on
+define(__db_user, ""); //Tietokannan käyttäjätunnus
+define(__db_pass, ""); //..ja salasana
+define(__db, ""); //Itse tietokanta.
+define(__port, '');
+define("__production",'');
+define("__development",'');
+//Kirjoita tiedot sulkujen sisään.
+
+/////////////////////////////////
+//DO NOT EDIT BELLOW THIS LINE!//
+/////////////////////////////////
+
+$con=@mysql_pconnect (__db_host, __db_user, __db_pass) or die ('I cannot connect to the database because: ' . mysql_error());
+@mysql_select_db (__db) or die("Database is not exist.");
+?>
