@@ -302,7 +302,7 @@ function huuda($message)
 	$message = utf8($message);
 	if (strlen($message) > 3 && $irc->firsttime == false)
 		foreach ($Server->wsClients as $id => $client)
-		$Server->wsSend(utf8_decode($id, date("H:i:s", time()) . " " . htmlentities($message) . "<br/>"));
+		$Server->wsSend($id, date("H:i:s", time()) . " " . htmlentities($message) . "<br/>");
 }
 // when a client connects
 function wsOnOpen($clientID)
