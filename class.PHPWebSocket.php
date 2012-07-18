@@ -568,7 +568,7 @@ class PHPWebSocket {
 		$headers = array('HTTP/1.1 101 Switching Protocols',
 			'Upgrade: websocket',
 			'Connection: Upgrade',
-			'Content-Type:text/html; charset=utf-8',
+			'Content-Type:text/html; charset=iso-8859-1',
 			'Sec-WebSocket-Accept: ' . $hash
 			);
 		$headers = implode("\r\n", $headers) . "\r\n\r\n";
