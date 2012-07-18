@@ -8,6 +8,8 @@
 // ircbot.php
 define("_DEBUG", 9); //Debug-taso. 1 = tärkeimmät, 9 = flooooood, 0 = no debug
 
+date_default_timezone_set("Europe/Helsinki");
+
 include "irc.class.php"; //irc-classi
 include "class.PHPWebSocket.php"; //Websocket-classi
 include "db.php"; //yhdistellään tietokantaan
@@ -24,7 +26,7 @@ while (1) { // botti pitää joko tappaa, tai käskeä erikseen poistumaan.
 	if (strcmp(getHostName(), "hakku") === 0) { // tuotanto
 		$Server->wsStartServer(__production, __port);
 		$botnick = "tunkki";
-		$kanava = "#mansecon";
+		$kanava = "#tunkki";
 	} else {
 		$Server->wsStartServer(__development, __port);
 		$botnick = "testitunkki";
@@ -81,7 +83,8 @@ while (1) { // botti pitää joko tappaa, tai käskeä erikseen poistumaan.
 					$irc->join($kanava);
 				} //rejoin-on-kick, mutta odotetaan 5sec välissä.
 				if (strstr($msg, "JOIN") && strstr($msg, "yuri.fi"))$irc->setMode($nick, "+o"); //auto-opataan Siika jos se ei oo opattu mut ite on
-				if (strstr($msg, "ACTION")) {
+				if(strstr($nick,"hub2.fi.b2irc.net")) {
+                } elseif (strstr($msg, "ACTION")) {
 					huuda(" * $nick " . substr($msg, 8));
 				} elseif (strstr($msg, "NICK")) {
 					$msgi = explode(":", $msg);
@@ -90,6 +93,8 @@ while (1) { // botti pitää joko tappaa, tai käskeä erikseen poistumaan.
 					huuda(" * $nick had enough (quit)");
 				} elseif (strstr($msg, "PART")) {
 					huuda(" * $nick had enough (part)");
+				} elseif(strcmp(_kanava,$msg) === 0 && strcmp($botnick,$nick) === 0) {
+    				huuda("----- Botti jälleen kanavalla "._kanava." -----");
 				} else {
 					huuda("<$nick> $msg");
 				}
